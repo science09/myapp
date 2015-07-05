@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+	<meta charset="UTF-8">
+    <title>{{.title}}</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	
+	<link rel="stylesheet" type="text/css" href="/public/css/amazeui.css"/>
+    <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png"> 
+    {{range .moreStyles}}
+      <link rel="stylesheet" type="text/css" href="/public/{{.}}">
+    {{end}}
+    {{range .moreScripts}}
+      <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
+    {{end}}
+	<style>
+	.blog-main {
+      padding: 20px 0;
+    }
+	.blog-title {
+      margin: 10px 0 20px 0;
+    }
+
+    .blog-meta {
+      font-size: 14px;
+      margin: 10px 0 20px 0;
+      color: #222;
+    }
+
+    .blog-meta a {
+      color: #27ae60;
+    }
+
+    .blog-pagination a {
+      font-size: 1.4rem;
+    }	
+
+    .blog-team li {
+      padding: 4px;
+    }
+
+    .blog-team img {
+      margin-bottom: 0;
+    }
+	
+	.footer p {
+      color: #7f8c8d;
+      margin: 0;
+      padding: 15px 0;
+      text-align: center;
+      background: #2d3e50;
+    }
+	</style>
+  </head>
+  <body>
+	<header id="amz-header" class="am-topbar am-topbar-inverse">
+	  <div class="am-container">
+	    <h1 class="am-topbar-brand">
+	      <a href="/">彼岸—未来</a>
+	    </h1>
+	
+	    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
+	            data-am-collapse="{target: '.amz-header-nav'}" ><span class="am-sr-only">导航切换</span> <span
+	        class="am-icon-bars"></span></button>
+	
+	    <div class="am-collapse am-topbar-collapse">		
+	      <ul class="am-nav am-nav-pills am-topbar-nav amz-header-nav">
+	        <li {{if eq .title "Home-MyBlog"}} class="am-active"{{end}}><a href="/">首页</a></li>
+	        <li {{if eq .title "投稿 - GBlog"}} class="am-active"{{end}}><a href="/write" >投稿</a></li>
+			<li {{if eq .title "Message - GBlog"}} class="am-active"{{end}}><a href="/message" >留言</a></li>
+			<li {{if eq .title "History blogs - GBlog"}} class="am-active"{{end}}><a href="/history" >归档</a></li>
+			<li {{if eq .title ""}} class="am-active"{{end}}><a href="/about">About Me</a></li>
+			<li {{if eq .title "Email list - GBlog"}} class="am-active"{{end}}><a href="/email">Email</a></li>
+			<li {{if eq .title ""}} class="am-active"{{end}}><a href="/#">RSS</a></li>	        
+	      </ul>
+	
+	      <div class="am-topbar-right">
+	        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
+	      </div>	
+	      <div class="am-topbar-right">
+	        <button class="am-btn am-btn-success am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+	      </div>
+	    </div>
+	  </div>
+	</header>

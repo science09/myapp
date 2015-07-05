@@ -1,0 +1,206 @@
+{{set . "title" "Bloginfor - GBlog" }}  
+{{set . "home" "active" }}  
+{{template "header.html" .}}  
+
+
+<div class="am-g am-g-fixed blog-g-fixed">
+	<div class="am-u-md-8"> 
+		{{if .blog}} 
+	    <article class="blog-main" style="border: 1px solid; border-color: #C4C4C4; border-radius: 5px; padding: 5px 5px 5px 15px; background: #fCfCfC;">
+	      <h4 class="am-article-title blog-title">
+	        {{.blog.Title}}
+	      </h4>
+		  <div class="am-article-meta blog-meta" style="color: #888;" >
+		    <span style="margin-right: 20px"><i class="am-icon-calendar"></i> {{.blog.CDate.Format "2006-01-02 15:04" }} 发布 </span>
+			<span style="margin-right: 20px"><i class="am-icon-user"></i> <a href="#" >{{.blog.Email}}</a></span>
+			<span style="margin-right: 20px"><i class="am-icon-eye"></i> {{.blog.ReadCnt}}</span> 
+			<span style="margin-right: 20px"><i class="am-icon-comment-o"></i> {{.blog.CommentCnt}}</span>
+		  </div>    
+		  <hr class="am-article-divider "> 
+	      <div class="am-g blog-content">
+	        <div class="am-u-lg-12">	
+			  	   
+	          	{{raw .blog.Subject}}
+			  
+	        </div>
+	      </div>
+	    </article>
+		</br>		
+	 
+	    <hr class="am-article-divider blog-hr">
+		
+	    <ul class="am-pagination blog-pagination">
+	      <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
+	      <li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
+	    </ul>
+		
+		{{if .comments}} 
+	    <div class="am-g am-pagination" style="margin-left: 10px;">  
+	        <span>七嘴八舌</span>  
+	        <hr>  
+			<ul class="am-comments-list ">
+			  {{range $index,$comment := .comments}} 
+  				<li class="am-comment">
+					<article class="am-comment">
+					  <a href="#link-to-user-home">
+					    <img src="http://amui.qiniudn.com/bw-2014-06-19.jpg?imageView/1/w/96/h/96" alt="" class="am-comment-avatar" width="48" height="48"/>
+					  </a>
+					
+					  <div class="am-comment-main">
+					    <header class="am-comment-hd">
+					      <div class="am-comment-meta">
+					        <a href="#link-to-user" class="am-comment-author">{{$comment.Email}}</a>
+					        评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">{{$comment.CDate.Format "2006-01-02 15:04" }}</time> 
+							  <span class="am-badge am-badge-success am-round" style="position:absolute; right: 10px;">{{pls $index 1}}楼</span>
+					      </div>
+					    </header>
+					
+					    <div class="am-comment-bd">
+					      {{$comment.Content}}
+					    </div>
+					  </div>
+					</article>
+  				</li>
+			  {{end}}
+			</ul>			
+	         
+	    </div>  
+		{{end}} 
+		<div am-g>
+	        <form class="am-form" action="/docomment" method="post">  
+			  <fieldset>
+    		  <legend>发表评论</legend>			
+	          <input type="hidden" name="id" value="{{.blog.Id.Hex}}">  
+	          <input type="hidden" name="rcnt" value="{{.rcnt}}">  
+	          <div class="am-form-group">  
+	            <label for="doc-ipt-email-1">Email</label>  
+	            {{with $field := field "comment.Email" .}}  
+	            <input type="email" id="{{$field.Id}}" name="{{$field.Name}}" placeholder="输入电子邮件" required value="{{if $field.Flash}}{{$field.Flash}}{{else}}{{$field.Value}}{{end}}">  
+	            <span class="help-inline erro">{{$field.Error}}</span>  
+	            {{end}}  
+	          </div>  
+	          <div class="am-form-group">  
+	            <label >Comment</label>  
+	            {{with $field := field "comment.Content" .}}  
+	            <textarea id="{{$field.Id}}" name="{{$field.Name}}" rows="6" placeholder="请开始吐槽吧!" required >{{if $field.Flash}}{{$field.Flash}}{{else}}{{$field.Value}}{{end}}</textarea>  
+	            {{end}}  
+	          </div>  
+	          <div class="am-form-group">  
+	            <button type="submit" class="am-btn am-btn-success">提交评论</button>  
+	          </div> 
+			  </fieldset> 
+	        </form>  
+			</br>
+	    </div>  
+		{{end}}	 
+	</div>
+	
+	<div class="am-u-md-4 blog-sidebar">
+	    <div class="am-panel-group">
+	      <!--<section class="am-panel am-panel-default">
+	        <div class="am-panel-hd">关于我</div>
+	        <div class="am-panel-bd">
+	          <p>前所未有的中文云端字型服务，让您在 web 平台上自由使用高品质中文字体，跨平台、可搜寻，而且超美。云端字型是我们的事业，推广字型学知识是我们的志业。从字体出发，关心设计与我们的生活，justfont blog
+	            正是為此而生。</p>
+	          <a class="am-btn am-btn-success am-btn-sm" href="#">查看更多 →</a>
+	        </div>
+	      </section>-->
+	      <section class="am-panel am-panel-default">
+	        <div class="am-panel-hd">文章目录</div>
+	        <ul class="am-list blog-list">
+	          <li><a href="#">Google fonts 的字體（sans-serif 篇）</a></li>
+	          <li><a href="#">[but]服貿最前線？－再訪桃園機場</a></li>
+	          <li><a href="#">到日星鑄字行學字型</a></li>
+	          <li><a href="#">glyph font vs. 漢字（上）</a></li>
+	          <li><a href="#">浙江民間書刻體上線</a></li>
+	          <li><a href="#">[極短篇] Android v.s iOS，誰的字體好讀？</a></li>
+	        </ul>
+	      </section>
+	
+	      <section class="am-panel am-panel-default">
+	        <div class="am-panel-hd">团队成员</div>
+	        <div class="am-panel-bd">
+	          <ul class="am-avg-sm-4 blog-team">
+	            <li><img class="am-thumbnail"
+	                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+	            </li>
+	            <li><img class="am-thumbnail"
+	                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+	            </li>
+	            <li><img class="am-thumbnail"
+	                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+	            </li>
+	            <li><img class="am-thumbnail"
+	                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+	            </li>
+	            <li><img class="am-thumbnail"
+	                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230159_kjTmC.thumb.224_0.jpeg" alt=""/>
+	            </li>
+	            <li><img class="am-thumbnail"
+	                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+	            </li>
+	            <li><img class="am-thumbnail"
+	                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+	            </li>
+	            <li><img class="am-thumbnail"
+	                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230159_kjTmC.thumb.224_0.jpeg" alt=""/>
+	            </li>
+	          </ul>
+	        </div>
+	      </section>
+	    </div>
+	</div>
+
+
+	<!--<div class="content">  
+	    {{if .blog}}  
+	     
+		{{if .comments}} 
+	    <div class="comments">  
+	        <span>回复</span>  
+	        <hr>  
+	        <dl class="the-comments">  
+			{{range $index,$comment := .comments}}  
+	          <dd >  
+	            <span class="label label-default pull-right">#{{pls $index 1}}</span>  
+	            <div class="user-info">  
+	              <a href="#"><strong>{{$comment.Email}}</strong></a> •  
+	              {{$comment.CDate.Format "2006-01-02 15:04" }}  
+	            </div>  
+	            <div class="user-comment">  
+	              <p>{{$comment.Content}}</p>  
+	            </div>  
+	          </dd> 
+			{{end}} 
+	        </dl>  
+	    </div>  
+		{{end}}  
+	    <div class="comments">  
+	        <div class="comment-form">  
+	          <form action="/docomment" method="post">  
+	            <input type="hidden" name="id" value="{{.blog.Id.Hex}}">  
+	            <input type="hidden" name="rcnt" value="{{.rcnt}}">  
+	            <div class="form-group">  
+	              <label >Email</label>  
+	              {{with $field := field "comment.Email" .}}  
+	              <input type="email" class="form-control" id="{{$field.Id}}" name="{{$field.Name}}"  placeholder="Your email" required value="{{if $field.Flash}}{{$field.Flash}}{{else}}{{$field.Value}}{{end}}">  
+	              <span class="help-inline erro">{{$field.Error}}</span>  
+	              {{end}}  
+	            </div>  
+	            <div class="form-group">  
+	              <label >Comment</label>  
+	              {{with $field := field "comment.Content" .}}  
+	              <textarea class="form-control" id="{{$field.Id}}" name="{{$field.Name}}" rows="6" placeholder="Enter the comment" required >{{if $field.Flash}}{{$field.Flash}}{{else}}{{$field.Value}}{{end}}</textarea>  
+	              {{end}}  
+	            </div>  
+	            <div class="form-group">  
+	              <button type="submit" class="btn btn-success">Submit</button>  
+	            </div>  
+	          </form>  
+	        </div>  
+	    </div>  
+	    {{end}}  
+	</div>  -->
+</div>
+  
+{{template "footer.html" .}} 

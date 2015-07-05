@@ -1,0 +1,37 @@
+{{set . "title" "投稿 - GBlog"}}
+{{set . "write" "active" }} 
+{{template "header.html" .}}
+
+<div class="am-g am-g-fixed blog-g-fixed" style="margin-bottom:30px">
+  <div class="am-u-sm-12 am-u-md-8 am-u-lm-4">
+	<form class="am-form" action="/putblog" method="post">
+        <label for="name" >文章标题</label>
+		{{with $field := field "blog.Title" .}} 
+        <input type="text" id="{{$field.Id}}" name="{{$field.Name}}" required  value="{{if $field.Flash}}{{$field.Flash}}{{else}}{{$field.Value}}{{end}}">
+		<span class="help-inline erro">{{$field.Error}}</span> 
+		<br/>
+		{{end}} 
+        <label for="email" >作者</label>
+		{{with $field := field "blog.Email" .}}
+        <input type="email" id="{{$field.Id}}" name="{{$field.Name}}" placeholder="请输入您的邮箱" required value="{{if $field.Flash}}{{$field.Flash}}{{else}}{{$field.Value}}{{end}}">
+        <span class="help-inline erro">{{$field.Error}}</span>
+		<br/>		
+		{{end}}
+        <label for="message" >文章内容</label>
+		{{with $field := field "blog.Subject" .}} 
+        <textarea  id="{{$field.Id}}" name="{{$field.Name}}" style="height: 350px;resize: vertical;"  required value="{{if $field.Flash}}{{$field.Flash}}{{else}}{{$field.Value}}{{end}}"></textarea>
+		<span class="help-inline erro">{{$field.Error}}</span>  
+		<br/>
+        {{end}}  
+        <button type="submit" class="am-btn am-btn-primary am-btn-block"><i class="am-icon-check"></i> 提 交</button>
+    </form>
+  </div>
+  <div class="am-u-sm-12 am-u-md-4 am-u-lm-4">
+	<div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="彼岸_未来">
+	  <div class="ds-thread"></div>
+	</div>
+  </div>
+	
+</div>
+
+{{template "footer.html" .}} 

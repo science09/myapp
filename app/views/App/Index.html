@@ -1,0 +1,98 @@
+{{set . "title" "Home-MyBlog"}}
+{{set . "home" "active"}}
+{{template "header.html" .}}
+
+<div class="am-g am-g-fixed blog-g-fixed">
+  <div class="am-u-md-8">
+    {{if .blogs}}
+    {{range $blog := .blogs}}
+    <article class="blog-main" style="border: 1px solid; border-color: #C4C4C4; border-radius: 5px; padding: 5px 5px 5px 15px; background: #fCfCfC;">
+      <h2 class="blog-title">
+        <a href="/bloginfor/{{$blog.Id.Hex}}/{{$blog.ReadCnt}}">{{$blog.Title}}</a>
+      </h2>
+	  <div class="am-article-meta blog-meta" style="color: #888;" >
+	    <span style="margin-right: 20px"><i class="am-icon-calendar"></i> {{$blog.CDate.Format "2006-01-02 15:04" }} 发布 </span>
+		<span style="margin-right: 20px"><i class="am-icon-user"></i> <a href="#" >{{$blog.Email}}</a></span>
+		<span style="margin-right: 20px"><i class="am-icon-eye"></i> {{$blog.ReadCnt}}</span> 
+		<span style="margin-right: 20px"><i class="am-icon-comment-o"></i> {{$blog.CommentCnt}}</span>
+	  </div>     
+      <div class="am-g blog-content">
+        <div class="am-u-lg-12">
+          <p>{{$blog.GetShortContent }}</p>
+        </div>
+      </div>
+    </article>
+	</br>
+	{{end}}
+	{{end}}
+ 
+    <hr class="am-article-divider blog-hr">
+	<ul class="am-pagination am-pagination-centered">
+		<li class="am-disabled"><a href="#">&laquo;</a></li>
+		<li class="am-active"><a href="#">1</a></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+		<li><a href="#">&raquo;</a></li>
+	</ul>	   
+  </div>
+
+  <div class="am-u-md-4 blog-sidebar">
+    <div class="am-panel-group">
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">关于我</div>
+        <div class="am-panel-bd">
+          <p>前所未有的中文云端字型服务，让您在 web 平台上自由使用高品质中文字体，跨平台、可搜寻，而且超美。云端字型是我们的事业，推广字型学知识是我们的志业。从字体出发，关心设计与我们的生活，justfont blog
+            正是為此而生。</p>
+          <a class="am-btn am-btn-success am-btn-sm" href="#">查看更多 →</a>
+        </div>
+      </section>
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">文章目录</div>
+        <ul class="am-list blog-list">
+          <li><a href="#">Google fonts 的字體（sans-serif 篇）</a></li>
+          <li><a href="#">[but]服貿最前線？－再訪桃園機場</a></li>
+          <li><a href="#">到日星鑄字行學字型</a></li>
+          <li><a href="#">glyph font vs. 漢字（上）</a></li>
+          <li><a href="#">浙江民間書刻體上線</a></li>
+          <li><a href="#">[極短篇] Android v.s iOS，誰的字體好讀？</a></li>
+        </ul>
+      </section>
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">团队成员</div>
+        <div class="am-panel-bd">
+          <ul class="am-avg-sm-4 blog-team">
+            <li><img class="am-thumbnail"
+                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+            </li>
+            <li><img class="am-thumbnail"
+                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+            </li>
+            <li><img class="am-thumbnail"
+                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+            </li>
+            <li><img class="am-thumbnail"
+                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+            </li>
+            <li><img class="am-thumbnail"
+                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230159_kjTmC.thumb.224_0.jpeg" alt=""/>
+            </li>
+            <li><img class="am-thumbnail"
+                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+            </li>
+            <li><img class="am-thumbnail"
+                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg" alt=""/>
+            </li>
+            <li><img class="am-thumbnail"
+                     src="http://img4.duitang.com/uploads/blog/201406/15/20140615230159_kjTmC.thumb.224_0.jpeg" alt=""/>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</div>
+
+{{template "footer.html" .}}

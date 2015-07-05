@@ -1,0 +1,19 @@
+{{set . "title" "Email list - GBlog"}}  
+{{set . "ema" "active" }}  
+{{template "header.html" .}}  
+
+  <div class="am-g am-g-fixed blog-g-fixed">  
+    <div class="am-u-lg-8" >  
+       {{if .emails}}  
+       {{range $email:= .emails}}
+       <span class="email-tag">  
+       <!-- <img src="http://www.gravatar.com/avatar/{{$email.ImgUrl}}?s=64" style="border-radius:32px"/>-->       
+		<img src="http://img1.touxiang.cn/uploads/20131010/10-012935_789.jpg" style="height:48px; border-radius:24px"/> 
+		<span title="last update at:{{$email.CDate.Format "2006-01-02 15:04"}}">{{$email.Email}}</span>  
+       </span>  
+       {{end}}  
+       {{end}}  
+    </div>  
+  </div>    
+  </body>  
+</html>  
